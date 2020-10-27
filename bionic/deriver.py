@@ -316,6 +316,7 @@ class EntityDeriver:
             ),
             aip_executor=self._bootstrap_singleton_entity("core__aip_executor"),
             process_executor=self._bootstrap_singleton_entity("core__process_executor"),
+            gcs_fs=self._bootstrap_singleton_entity("core__persistent_cache__gcs__fs"),
             should_memoize_default=self._bootstrap_singleton_entity(
                 "core__memoize_by_default"
             ),
@@ -693,8 +694,9 @@ class Bootstrap:
     versioning_policy = attr.ib()
     aip_executor = attr.ib()
     process_executor = attr.ib()
-    should_memoize_default = attr.ib()
-    should_persist_default = attr.ib()
+    gcs_fs = attr.ib()
+    should_memoize_default = attr.ib(type=bool)
+    should_persist_default = attr.ib(type=bool)
 
     def evolve(self, **kwargs):
         return attr.evolve(self, **kwargs)
